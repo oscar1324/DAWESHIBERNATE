@@ -17,17 +17,19 @@ public class AsignaturasDAOImplHib implements AsignaturasDAO{
 
 	@Override
 	public Integer insertarAsignaturas(String id, String nombre, String curso) {
-		AsignaturaEntity as = new AsignaturaEntity(Integer.parseInt(id),nombre,Integer.parseInt(curso), null );
-		//Creamos sessionFactory
-		SessionFactory factory = DBUtils.creadorSessionFactory();
+		AsignaturaEntity a = new AsignaturaEntity( Integer.parseInt(id), nombre, Integer.parseInt(curso));
 		
-		//Creamos session, introducir getCurrentSession
+		SessionFactory factory = DBUtils.creadorSessionFactory();
 		Session ss = factory.getCurrentSession();
 		
+		ss.beginTransaction();
+		
 		//idPK
-		Integer idPk = (Integer) ss.save(as);
+		Integer idPk = (Integer) ss.save(a);
 		ss.getTransaction().commit();
+		
 		return idPk;
+	
 	}
 
 	@Override
@@ -52,7 +54,7 @@ public class AsignaturasDAOImplHib implements AsignaturasDAO{
 				+ "FROM AsignaturaEntity a, MatriculacionesEntity m where a.id = m.id CAST(a.id AS string)";*/
 		
 		String jpql = "select new com.kike.colegio.dtos.Asignaturas(asig.id, asig.nombre, asig.curso)"
-				+ "FROM AsignaturaEntity AND CAST(asig.id AS string) LIKE :id AND asig.nombre LIKE :juanma AND asig.curso LIKE :curso";
+				+ " FROM AsignaturaEntity  asig WHERE CAST(asig.id AS string) LIKE :id AND asig.nombre LIKE :nombre AND CAST(asig.curso AS string) LIKE :curso";
 		// hacemos uso de LIKE:id para sustituir el like ? que utilizamos anteriormente
 		
 		//creación sessionFactory
@@ -62,7 +64,7 @@ public class AsignaturasDAOImplHib implements AsignaturasDAO{
 		ss.beginTransaction();
 		
 		// preguntar query
-		Query query = ss.createQuery(jpql).setParameter("id", "%" + id + "%").setParameter("juanma", "%" + nombre + "%").setParameter("curso", "%" + curso + "%");
+		Query query = ss.createQuery(jpql).setParameter("id", "%" + id + "%").setParameter("nombre", "%" + nombre + "%").setParameter("curso", "%" + curso + "%");
 		//      ------- se menciona por el alias
 		List<Asignaturas> lista = query.getResultList(); 
 		return lista;
@@ -71,9 +73,9 @@ public class AsignaturasDAOImplHib implements AsignaturasDAO{
 	@Override
 	public Integer actualizarAsignaturas(String idOld, String idNew, String nombre, String curso) {
 
-		//AsignaturaEntity a = new AsignaturaEntity(Integer.parseInt(idOld), Integer.parseInt(idNew), nombre, Integer.parseInt(curso));
+		AsignaturaEntity a = new AsignaturaEntity( Integer.parseInt(idNew), nombre, Integer.parseInt(curso));
 		//Integer.parseInt(idOld), Integer.parseInt(idNew), nombre, Integer.parseInt(curso)
-		AsignaturaEntity a = new AsignaturaEntity(id, nombreAsignatura, curso);
+		//AsignaturaEntity a = new AsignaturaEntity(id, nombreAsignatura, curso);
 		//sessionFactory
 		SessionFactory factory = DBUtils.creadorSessionFactory();
 		Session ss = factory.getCurrentSession();
@@ -81,8 +83,9 @@ public class AsignaturasDAOImplHib implements AsignaturasDAO{
 		//cambios beginTransaction() ipdate() commit()
 		ss.beginTransaction();
 		ss.update(a);
-		ss.getTransaction();
+		ss.getTransaction().commit();
 		return a.getId();
+		
 	}
 
 	@Override
@@ -102,7 +105,7 @@ public class AsignaturasDAOImplHib implements AsignaturasDAO{
 		//elminación de entidad
 		if(as != null) {
 			ss.delete(as);
-			ss.getTransaction().commit();
+			ss.getTransaction().commit();// escribe los cambios en la base de datos
 			ss.close();
 			
 			return 1;
