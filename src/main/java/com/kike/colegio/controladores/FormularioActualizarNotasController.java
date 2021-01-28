@@ -53,8 +53,8 @@ public class FormularioActualizarNotasController extends HttpServlet {
 		String nombreAsignatura = request.getParameter("nombreAsignatura");
 		String fecha = request.getParameter("fecha");
 	
-		ComboUtils.recuperacionComboAlumnos(request);
-		ComboUtils.recuperacionComboAsignaturas(request);
+		ComboUtils.recuperarComboAsignaturasHib(request);
+		ComboUtils.recuperarComboAsignaturasHib(request);
 		// 2. instanciar objetos
 		NotasDAO a = new NotasDAOImpl();
 		List<NotasDTO> listaNotas = new ArrayList<>();

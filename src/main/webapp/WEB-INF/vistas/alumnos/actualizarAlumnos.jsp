@@ -13,13 +13,13 @@
 </head>
 <body>
 
-<h1>Listado Notas</h1>
+<h1>Listado Alumnos</h1>
 <%@include file="/menu.html" %>
 
 
 <div class="container">
 
-<h2> Actualizar Notas</h2>
+<h2> Actualizar Alumnos</h2>
 	<div class="form"> 
 		<form action="http://localhost:8080/colegio/formularioactualizaralumnos" method="post">
 		  

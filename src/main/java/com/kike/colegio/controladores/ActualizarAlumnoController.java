@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kike.colegio.dao.AlumnoDAO;
 import com.kike.colegio.dao.impl.AlumnoDAOImpl;
+import com.kike.colegio.implhibernate.AlumnoDAOImplHib;
 
 /**
  * Servlet implementation class ActualizarAlumno
@@ -47,7 +48,7 @@ public class ActualizarAlumnoController extends HttpServlet {
 		
 
 
-		AlumnoDAO a = new AlumnoDAOImpl();
+		AlumnoDAO a = new AlumnoDAOImplHib();
 		a.actualizarAlumno(idOld, idNew, nombre, idMunicipio, null);
 		// preguntar el quinto elemento
 		

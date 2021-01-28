@@ -34,7 +34,7 @@ public class AlumnoDAOImplHib  implements AlumnoDAO{
 	@Override
 	public List<Alumno> obtenerAlumnosporIdyNombre(String id, String nombre) {
 
-		String jpql = " select new com.kike.colegio.dtos.AlumnoDTO (a.id, a.nombre, m.nombre, m.idMunicipio, a.famNumerosa)"
+		String jpql = " select new com.kike.colegio.dtos.Alumno (a.id, a.nombre, m.nombre, m.idMunicipio, a.famNumerosa)"
 				+ "FROM AlumnoEntity a, MunicipiosEntity m WHERE a.idMunicipio = m.idMunicipio AND  CAST( a.id AS string )  LIKE :id AND a.nombre LIKE :nombre";
 
 		SessionFactory factory = DBUtils.creadorSessionFactory();

@@ -9,6 +9,7 @@ import com.kike.colegio.dao.impl.CombosDAOImpl;
 import com.kike.colegio.dtos.ComboAlumnosDTO;
 import com.kike.colegio.dtos.ComboAsignaturasDTO;
 import com.kike.colegio.dtos.ComboDTO;
+import com.kike.colegio.implhibernate.CombosDAOImplHib;
 
 public class ComboUtils {
 
@@ -20,14 +21,14 @@ public class ComboUtils {
 	}
 	
 	//combo con hibernate
-	/*
-	 * public static void recuperacionComboMunicipiosHib(HttpServletRequest request) {
+	 public static void recuperacionComboMunicipiosHib(HttpServletRequest request) {
 		CombosDAO comboMunicipio = new CombosDAOImplHib();
 		List<ComboDTO> listaMunicipios = comboMunicipio.comboMunicipios();
 		request.setAttribute("comboMunicipios", listaMunicipios);
-	}*/
+	}
 	
-	public static void recuperacionComboAlumnos(HttpServletRequest request) {
+	/*
+	 * 	public static void recuperacionComboAlumnos(HttpServletRequest request) {
 		CombosDAO comboAlumnos = new CombosDAOImpl();
 		List<ComboAlumnosDTO> listaAlumnos = comboAlumnos.comboAlumnos();
 		request.setAttribute("comboAlumnos", listaAlumnos);
@@ -36,6 +37,15 @@ public class ComboUtils {
 		CombosDAO comboAsignaturas = new CombosDAOImpl();
 		List<ComboAsignaturasDTO> listaAsignaturas = comboAsignaturas.comboAsignaturas();
 		request.setAttribute("comboAsignaturas", listaAsignaturas);
+	}*/
+	public static void recuperarComboAlumnosHib(HttpServletRequest request) {	
+		CombosDAO c = new CombosDAOImpl();		
+		request.setAttribute("listaAlumnos", c.comboAlumnos());
+	}
+	
+	public static void recuperarComboAsignaturasHib(HttpServletRequest request) {		
+		CombosDAO c = new CombosDAOImpl();		
+		request.setAttribute("listaAsignaturas", c.comboAsignaturas());
 	}
 
 }

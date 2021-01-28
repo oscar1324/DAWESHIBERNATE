@@ -12,9 +12,9 @@ public interface CombosDAO {
 	
 	List<ComboDTO> comboMunicipios();
 	
-	List<ComboAlumnosDTO> comboAlumnos();
+	List<ComboDTO> comboAlumnos();
 	
-	List<ComboAsignaturasDTO> comboAsignaturas();
+	List<ComboDTO> comboAsignaturas();
 	
 
 }

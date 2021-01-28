@@ -38,8 +38,7 @@ public class InsertarNotaController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 1- Recuperar de la BBDD todos los alumnos id-nombre + asignaturas
-		ComboUtils.recuperacionComboAlumnos(request);
-		ComboUtils.recuperacionComboAsignaturas(request);
+		ComboUtils.recuperarComboAsignaturasHib(request);
 		
 		RequestDispatcher d = getServletContext().getRequestDispatcher("/WEB-INF/vistas/notas/InsertarNotas.jsp");
 		d.forward(request, response);
@@ -62,8 +61,8 @@ public class InsertarNotaController extends HttpServlet {
 		Integer resultado = a.insertarNotas(alumnos, id_asignatura, notas, fecha);
 		
 		request.setAttribute("resultado", resultado);
-		ComboUtils.recuperacionComboAlumnos(request);
-		ComboUtils.recuperacionComboAsignaturas(request);
+		ComboUtils.recuperarComboAlumnosHib(request);
+		ComboUtils.recuperarComboAsignaturasHib(request);
 		
 		RequestDispatcher d = getServletContext().getRequestDispatcher("/WEB-INF/vistas/notas/InsertarNotas.jsp");
 		d.forward(request, response);

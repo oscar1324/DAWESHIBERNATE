@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.kike.colegio.dao.AlumnoDAO;
 import com.kike.colegio.dao.impl.AlumnoDAOImpl;
 import com.kike.colegio.dtos.Alumno;
+import com.kike.colegio.implhibernate.AlumnoDAOImplHib;
 import com.kike.colegio.utils.ComboUtils;
 
 /**
@@ -44,12 +45,12 @@ public class FormularioActualizarAlumnosController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ComboUtils.recuperacionComboMunicipios(request);
+		ComboUtils.recuperacionComboMunicipiosHib(request);
 		
 		String id = request.getParameter("id");
 		String nombre = request.getParameter("nombre");
 		
-		AlumnoDAO a = new AlumnoDAOImpl();
+		AlumnoDAO a = new AlumnoDAOImplHib();
 	 	List<Alumno> listaAlumnos = new ArrayList<>();
 	 	
 	 	listaAlumnos = a.obtenerAlumnosporIdyNombre(id, nombre);

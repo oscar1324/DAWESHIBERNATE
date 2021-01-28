@@ -21,6 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.kike.colegio.dtos.Alumno;
+import com.kike.colegio.implhibernate.AlumnoDAOImplHib;
 import com.kike.colegio.utils.DBUtils;
 import com.kike.colegio.dao.AlumnoDAO;
 
@@ -66,7 +67,7 @@ public class ListadoAlumnosController extends HttpServlet {
 		String id = request.getParameter("id");
 		String nombre = request.getParameter("nombre");
 		
-		AlumnoDAO a = new AlumnoDAOImpl();
+		AlumnoDAO a = new AlumnoDAOImplHib();
 	 	List<Alumno> listaAlumnos = new ArrayList<>();
 	 	
 	 	listaAlumnos = a.obtenerAlumnosporIdyNombre(id, nombre);

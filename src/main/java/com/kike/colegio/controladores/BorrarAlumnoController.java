@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kike.colegio.dao.AlumnoDAO;
 import com.kike.colegio.dao.impl.AlumnoDAOImpl;
+import com.kike.colegio.implhibernate.AlumnoDAOImplHib;
 
 /**
  * Servlet implementation class BorrarAlumno
@@ -42,7 +43,7 @@ public class BorrarAlumnoController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
 		
-		AlumnoDAO a = new AlumnoDAOImpl();
+		AlumnoDAO a = new AlumnoDAOImplHib();
 		
 		a.borrarAlumno(id);
 		

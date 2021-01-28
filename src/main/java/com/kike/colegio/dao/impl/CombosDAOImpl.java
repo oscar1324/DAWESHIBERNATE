@@ -42,10 +42,10 @@ public class CombosDAOImpl implements CombosDAO{
 	}
 
 	@Override
-	public List<ComboAlumnosDTO> comboAlumnos() {
+	public List<ComboDTO> comboAlumnos() {
 		
 		String sql = "SELECT * FROM alumnos ORDER BY nombre";
-		List<ComboAlumnosDTO> listaAlumnos = new ArrayList<>();
+		List<ComboDTO> listaAlumnos = new ArrayList<>();
 		
 		try {
 			Connection connection = DBUtils.DBConnection();
@@ -53,7 +53,7 @@ public class CombosDAOImpl implements CombosDAO{
 			ResultSet rs = ps.executeQuery();
 			
 			while (rs.next()) {				
-				ComboAlumnosDTO a = new ComboAlumnosDTO(rs.getInt(1), rs.getString(2));
+				ComboDTO a = new ComboDTO(rs.getInt(1), rs.getString(2));
 				listaAlumnos.add(a);
 			}
 		} catch (Exception e) {
@@ -64,10 +64,10 @@ public class CombosDAOImpl implements CombosDAO{
 	}
 
 	@Override
-	public List<ComboAsignaturasDTO> comboAsignaturas() {
+	public List<ComboDTO> comboAsignaturas() {
 		
 		String sql = "SELECT * FROM asignaturas ORDER BY nombre";
-		List<ComboAsignaturasDTO> listaAsignaturas = new ArrayList<>();
+		List<ComboDTO> listaAsignaturas = new ArrayList<>();
 		
 		
 		try {
@@ -76,7 +76,7 @@ public class CombosDAOImpl implements CombosDAO{
 			ResultSet rs = ps.executeQuery();
 			
 			while (rs.next()) {				
-				ComboAsignaturasDTO a = new ComboAsignaturasDTO(rs.getInt(1), rs.getString(2));
+				ComboDTO a = new ComboDTO(rs.getInt(1), rs.getString(2));
 				listaAsignaturas.add(a);
 			}
 		} catch (Exception e) {
