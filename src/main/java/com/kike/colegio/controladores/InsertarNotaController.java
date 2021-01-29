@@ -58,7 +58,9 @@ public class InsertarNotaController extends HttpServlet {
 		// instanciar objetos
 		// (id_alumno, alumnos,id_asignatura, notas, fecha)
 		NotasDAO a = new NotasDAOImpl();
-		Integer resultado = a.insertarNotas(alumnos, id_asignatura, notas, fecha);
+		Integer resultado = a.insertarNota(idAlumno, idAsignatura, notas, fecha);
+		// realizar cambios, fijarme en como lo he declarado las variables en DAO
+		//Integer resultado = a.insertarNotas(alumnos, id_asignatura, notas, fecha);
 		
 		request.setAttribute("resultado", resultado);
 		ComboUtils.recuperarComboAlumnosHib(request);
