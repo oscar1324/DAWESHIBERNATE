@@ -83,46 +83,46 @@ public class NotasDAOImpl implements NotasDAO{
 		return listaNotas;
 	}
 	
-	@Override
-	public Integer insertarNotas( String alumnos, String idas, String notas, String fecha) {
-		String sql = "INSERT INTO notas (id_alumnos ,id_asignaturas ,nota ,fecha ) VALUES (?, ?, ? , ?)";
-		
-		Connection connection = DBUtils.DBConnection();
-		Integer resultado = null;
-		PreparedStatement ps = null;
-		
-		
-		try {
-			ps = connection.prepareStatement(sql);
-			// meter
-			 if (fecha=="") {
-				 SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
-				 Date now = new Date();
-				       String strDate = sdfDate.format(now);
-				      fecha=strDate;
-				 }
-		
-			ps.setString(1, alumnos);
-			ps.setString(2, idas );
-			ps.setString(3, notas);
-			ps.setString(4, fecha);
-			
-			resultado = ps.executeUpdate();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			try {
-				connection.close();
-				ps.close();
-			} catch (SQLException e) {
-				
-				e.printStackTrace();
-			}
-
-		}
-		return resultado;
-	}
+//	@Override
+//	public Integer insertarNotas( String alumnos, String idas, String notas, String fecha) {
+//		String sql = "INSERT INTO notas (id_alumnos ,id_asignaturas ,nota ,fecha ) VALUES (?, ?, ? , ?)";
+//		
+//		Connection connection = DBUtils.DBConnection();
+//		Integer resultado = null;
+//		PreparedStatement ps = null;
+//		
+//		
+//		try {
+//			ps = connection.prepareStatement(sql);
+//			// meter
+//			 if (fecha=="") {
+//				 SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
+//				 Date now = new Date();
+//				       String strDate = sdfDate.format(now);
+//				      fecha=strDate;
+//				 }
+//		
+//			ps.setString(1, alumnos);
+//			ps.setString(2, idas );
+//			ps.setString(3, notas);
+//			ps.setString(4, fecha);
+//			
+//			resultado = ps.executeUpdate();
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}finally {
+//			try {
+//				connection.close();
+//				ps.close();
+//			} catch (SQLException e) {
+//				
+//				e.printStackTrace();
+//			}
+//
+//		}
+//		return resultado;
+//	}
 
 /*
  * 	@Override
@@ -271,6 +271,12 @@ public class NotasDAOImpl implements NotasDAO{
 		
 		
 		return listaNotas;
+	}
+
+	@Override
+	public Integer insertarNota(String idAlumno, String idAsignatura, String nota, String fecha) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

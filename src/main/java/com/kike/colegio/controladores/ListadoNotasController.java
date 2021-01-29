@@ -51,7 +51,7 @@ public class ListadoNotasController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 1. recogida de valores del formulario
-		String id_alumno = request.getParameter("id_alumnos");
+		String id_alumno = request.getParameter("id_alumnos");//coge los parametros del DAO
 		String alumnos = request.getParameter("alumnos");
 		String id_asignatura = request.getParameter("idas");
 		String notas = request.getParameter("notas");

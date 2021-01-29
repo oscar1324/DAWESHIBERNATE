@@ -50,7 +50,7 @@ public class FormularioActualizarNotasController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 1. recuperar parametros    SIMPLEMENTE TE PIDEN 3
 		String nombreAlumno = request.getParameter("nombreAlumno");
-		String nombreAsignatura = request.getParameter("nombreAsignatura");
+		String nombreAsignatura = request.getParameter("nombreAsignatura");// para luego modificar en insertar o acutalizar en jsp
 		String fecha = request.getParameter("fecha");
 	
 		ComboUtils.recuperarComboAsignaturasHib(request);
