@@ -1,4 +1,4 @@
-package com.kike.colegio.controladores;
+package com.kike.controladores.notas;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,23 +11,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kike.colegio.dao.AsignaturasDAO;
 import com.kike.colegio.dao.NotasDAO;
-import com.kike.colegio.dao.impl.AsignaturasDAOImpl;
 import com.kike.colegio.dao.impl.NotasDAOImpl;
+import com.kike.colegio.dtos.Asignaturas;
 import com.kike.colegio.dtos.Notas;
+import com.kike.colegio.dtos.NotasDTO;
+import com.kike.colegio.utils.ComboUtils;
 
 /**
- * Servlet implementation class BorrarNotasController
+ * Servlet implementation class FormularioBorrarNotasController
  */
-@WebServlet("/borrarnotas")
-public class BorrarNotasController extends HttpServlet {
+@WebServlet("/borrarformularionotas")
+public class FormularioBorrarNotasController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BorrarNotasController() {
+    public FormularioBorrarNotasController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,6 +37,7 @@ public class BorrarNotasController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		RequestDispatcher d = getServletContext().getRequestDispatcher("/WEB-INF/vistas/notas/BorrarNotas.jsp");
 		d.forward(request, response);
 	}
@@ -45,20 +47,23 @@ public class BorrarNotasController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// recuperar datos del formulario
-		String id = request.getParameter("id_alumnos");
-		//String alumnos = request.getParameter("alumnos");
-		//String id_asignatura = request.getParameter("idas");
-		//String notas = request.getParameter("notas");
-		//String fecha = request.getParameter("fecha");
+		String id_alumno = request.getParameter("id_alumnos");
+		String alumnos = request.getParameter("alumnos");
+		String id_asignatura = request.getParameter("idas");
+		String notas = request.getParameter("notas");
+		String fecha = request.getParameter("fecha");
 		
 		// instanciar objetos
 		// (id_alumno, alumnos,id_asignatura, notas, fecha)
 		NotasDAO a = new NotasDAOImpl();
+		List<NotasDTO> listaNotas = new ArrayList<>();
 		
-		a.borrarNotas(id);
+		listaNotas = a.obtenerNotaPorIdNombreAsignaturaNotaFecha(id_alumno, alumnos, id_asignatura, notas, fecha);
 		
+		request.setAttribute("listaNotas", listaNotas);
+
 		RequestDispatcher d = getServletContext().getRequestDispatcher("/WEB-INF/vistas/notas/BorrarNotas.jsp");
 		d.forward(request, response);
 	}
-	
+
 }

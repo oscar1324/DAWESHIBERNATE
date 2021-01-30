@@ -1,6 +1,9 @@
-package com.kike.colegio.controladores;
+package com.kike.controladores.notas;
 
 import java.io.IOException;
+import java.lang.System.Logger;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,26 +12,27 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.kike.colegio.dao.NotasDAO;
 import com.kike.colegio.dao.impl.NotasDAOImpl;
-import com.kike.colegio.utils.ComboUtils;
+import com.kike.colegio.dtos.Notas;
+import com.kike.colegio.dtos.NotasDTO;
 
 /**
- * Servlet implementation class InsertarNotaController
+ * Servlet implementation class ListadoNotasController
  */
-@WebServlet("/insertarnota")
-public class InsertarNotaController extends HttpServlet {
+
+@WebServlet("/listadonotas")
+public class ListadoNotasController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private static Logger logger = LoggerFactory.getLogger(InsertarNotaController.class);
+	private static org.slf4j.Logger logger = LoggerFactory.getLogger(ListadoNotasController.class);
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertarNotaController() {
+    public ListadoNotasController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,10 +41,9 @@ public class InsertarNotaController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 1- Recuperar de la BBDD todos los alumnos id-nombre + asignaturas
-		ComboUtils.recuperarComboAsignaturasHib(request);
+		// 1. Direccionar hacia listadoNotas.jsp
 		
-		RequestDispatcher d = getServletContext().getRequestDispatcher("/WEB-INF/vistas/notas/InsertarNotas.jsp");
+		RequestDispatcher d = getServletContext().getRequestDispatcher("/WEB-INF/vistas/notas/listadoNotas.jsp");
 		d.forward(request, response);
 	}
 
@@ -48,25 +51,23 @@ public class InsertarNotaController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// recuperar datos del formulario
-		//String id_alumno = request.getParameter("id_alumnos");
+		// 1. recogida de valores del formulario
+		String id_alumno = request.getParameter("id_alumnos");//coge los parametros del DAO
 		String alumnos = request.getParameter("alumnos");
 		String id_asignatura = request.getParameter("idas");
 		String notas = request.getParameter("notas");
 		String fecha = request.getParameter("fecha");
 		
-		// instanciar objetos
-		// (id_alumno, alumnos,id_asignatura, notas, fecha)
+		// 2. Instanciar objetos
 		NotasDAO a = new NotasDAOImpl();
-		Integer resultado = a.insertarNota(idAlumno, idAsignatura, notas, fecha);
-		// realizar cambios, fijarme en como lo he declarado las variables en DAO
-		//Integer resultado = a.insertarNotas(alumnos, id_asignatura, notas, fecha);
+		List<NotasDTO> listaNotas = new ArrayList<>();
 		
-		request.setAttribute("resultado", resultado);
-		ComboUtils.recuperarComboAlumnosHib(request);
-		ComboUtils.recuperarComboAsignaturasHib(request);
+		//listaNotas = a.obtenerNotasTodo(id_alumno, alumnos,id_asignatura, notas, fecha);
+		listaNotas = a.obtenerNotaPorIdNombreAsignaturaNotaFecha(id_alumno, alumnos, id_asignatura, notas, fecha);
 		
-		RequestDispatcher d = getServletContext().getRequestDispatcher("/WEB-INF/vistas/notas/InsertarNotas.jsp");
+		// 3. dar valor +  direccionar fichero
+		request.setAttribute("lista", listaNotas);
+		RequestDispatcher d = getServletContext().getRequestDispatcher("/WEB-INF/vistas/notas/listadoNotas.jsp");
 		d.forward(request, response);
 	}
 

@@ -16,14 +16,14 @@ import com.kike.colegio.utils.DBUtils;
 public class NotasDAOImplHib implements NotasDAO{
 
 	@Override
-	public List<Notas> obtenerAsignaturas() {
+	public List<NotasDTO> obtenerAsignaturas() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Notas> obtenerNotasTodo(String id_alumno, String alumnos, String id_asignatura, String notas,
-			String fecha) {
+	public List<NotasDTO> obtenerNotaPorIdNombreAsignaturaNotaFecha(String idAlumno, String nombre, String asignatura,
+			String nota, String fecha) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -45,10 +45,9 @@ public class NotasDAOImplHib implements NotasDAO{
 		//Asignatura Entity encontrar mediante .find
 		AsignaturaEntity asig = s.find(AsignaturaEntity.class, Integer.parseInt(idAsignatura));
 		
-		 Integer idA = a.getId();
 		 
-		 // NotasEntity n = new NotasEntity(a, asig, Double.parseDouble(nota), fecha);
-		 NotasEntity n = new NotasEntity(idA, a, asig, Double.parseDouble(nota), fecha);
+		 NotasEntity n = new NotasEntity(a, asig, Double.parseDouble(nota), fecha);
+		
 		 Integer idPk = (Integer) s.save(n);
 		 
 		 s.getTransaction().commit();
@@ -66,6 +65,8 @@ public class NotasDAOImplHib implements NotasDAO{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 
 
 

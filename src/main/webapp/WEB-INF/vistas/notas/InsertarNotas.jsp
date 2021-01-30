@@ -19,23 +19,20 @@
 
 	<div class="container">
 		<div class="form">
-			<form action="http://localhost:8080/colegio/insertarnota"
-				method="post" id="formulario">
+			<form action="http://localhost:8080/colegio/insertarnota" method="post" id="formulario">
 				<label for="alumnos">Nombre Alumno</label>
 				<select name="alumnos" id="alumnos" form="formulario">
-					<c:forEach items="${comboAlumnos}" var="alumnos">
-
-						<option value="${alumnos.id}">${alumnos.nombre}</option>
-
-
+					<c:forEach items="${listaAlumnos}" var="alumnos"> <!-- puede haber un error -->
+						<option value="${alumnos.id}">${alumnos.id}-${alumnos.descripcion}</option>
 					</c:forEach>
-
 				</select><br><br>
-				<label for="idas">Nombre Asignatura</label>
+				
+				
+				 <label for="idas">Nombre Asignatura</label>
 				 <select name="idas" id="idas" form="formulario">
-					<c:forEach items="${comboAsignaturas}" var="asignaturas">
+					<c:forEach items="${listaAsignaturas}" var="asignaturas">
 
-						<option value="${asignaturas.id}">${asignaturas.nombre}</option>
+						<option value="${asignaturas.id}">${asignaturas.id}-${asignaturas.descripcion}</option><!-- Puede que haya un error -->
 
 					</c:forEach>
 					

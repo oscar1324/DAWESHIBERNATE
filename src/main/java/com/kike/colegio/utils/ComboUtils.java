@@ -39,13 +39,16 @@ public class ComboUtils {
 		request.setAttribute("comboAsignaturas", listaAsignaturas);
 	}*/
 	public static void recuperarComboAlumnosHib(HttpServletRequest request) {	
-		CombosDAO c = new CombosDAOImpl();		
-		request.setAttribute("listaAlumnos", c.comboAlumnos());
+		CombosDAO comboAlumnos = new CombosDAOImplHib();	// puede ser error	
+		List<ComboDTO> listaAlumnos = comboAlumnos.comboAlumnos();
+		request.setAttribute("listaAlumnos",listaAlumnos);
+
 	}
 	
 	public static void recuperarComboAsignaturasHib(HttpServletRequest request) {		
-		CombosDAO c = new CombosDAOImpl();		
-		request.setAttribute("listaAsignaturas", c.comboAsignaturas());
+		CombosDAO comboAsignaturas = new CombosDAOImplHib();		
+		List<ComboDTO> listaAsignaturas = comboAsignaturas.comboAsignaturas();
+		request.setAttribute("listaAsignaturas",listaAsignaturas);
 	}
 
 }

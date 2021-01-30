@@ -28,7 +28,7 @@ public class NotasEntity {
 	private AlumnoEntity alumnos;
 	
 	@ManyToOne(fetch= FetchType.LAZY,cascade = CascadeType.PERSIST)
-	//@MapsId("id")
+	//@MapsId("id") ojo que puede dar problemas
 	@JoinColumn(name= "id_asignaturas")
 	private AsignaturaEntity asignaturas;
 	
@@ -38,37 +38,25 @@ public class NotasEntity {
 	@Column(name= "fecha")
 	private String fecha;
 	
-	//Constructores, Getters y setters
-
-	public NotasEntity() {
+	public NotasEntity(AlumnoEntity alumnos, AsignaturaEntity asignaturas, Double nota, String fecha) {
 		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public NotasEntity(Integer id, AlumnoEntity alumnos, AsignaturaEntity asignaturas, Double nota, String fecha) {
-		super();
-		this.id = id;
 		this.alumnos = alumnos;
 		this.asignaturas = asignaturas;
 		this.nota = nota;
 		this.fecha = fecha;
 	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public AlumnoEntity getAlumnos() {
+	
+	
+	public AlumnoEntity getAlumnoEntity() {
+		
 		return alumnos;
+		
 	}
-
 	public void setAlumnos(AlumnoEntity alumnos) {
 		this.alumnos = alumnos;
 	}
+
+
 
 	public AsignaturaEntity getAsignaturas() {
 		return asignaturas;
@@ -93,4 +81,14 @@ public class NotasEntity {
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
+
+	//Constructores, Getters y setters
+
+//	public NotasEntity(AlumnoEntity a, AsignaturaEntity asig, double nota, String fecha2) {
+//		super();
+//		// TODO Auto-generated constructor stub
+//	}
+
+	
+
 }
